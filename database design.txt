@@ -1,0 +1,52 @@
+Role
+    - [*] id (UUID)
+    - [*] name (ADMIN, MANAGER, STAFF)
+    - [*] created_at (Date)
+    - [] deleted_at (Date)
+
+User
+    - [*] id (UUID)
+    - [*] username (string)
+    - [*] password (encrypt)
+    - [*] firstname (string)
+    - [*] lastname (string)
+    - [*] role_id (UUID)
+    - [*] created_at (Date)
+    - [] deleted_at (Date)
+
+Branch
+    - [*] id (UUID)
+    - [*] name (string)
+    - [*] province (string)
+    - [] user_ids (UUID[])
+    - [*] created_at (Date)
+    - [] deleted_at (Date)
+
+Product
+    - [*] id (UUID)
+    - [*] branch_id (UUID)
+    - [] image_url (string)
+    - [*] name (string)
+    - [*] description (string)
+    - [*] cost_price (number)
+    - [*] sale_price (number)
+    - [*] total (number)
+    - [*] created_at (Date)
+    - [] deleted_at (Date)
+
+Bill
+    - [*] id (UUID)
+    - [*] branch_id (UUID)
+    - [*] customer_name (string)
+    - [*] address (string)
+    - [*] province (string)
+    - [*] amphoe (string)
+    - [*] tambon (string)
+    - [*] zipcode (string)
+    - [*] phone (string)
+    - [*] products (UUID[])
+    - [] discount (number)
+    - [*] user_id (UUID)
+    - [*] status (PR, PO, TRANSPORT, COMPLETED)
+    - [*] created_at (Date)
+    - [] deleted_at (Date)
