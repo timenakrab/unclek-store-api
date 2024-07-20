@@ -1,6 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IProduct extends Document {
+	_id: mongoose.Types.ObjectId;
 	branch_id: mongoose.Types.ObjectId;
 	image_url?: string;
 	name: string;

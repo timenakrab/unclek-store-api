@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-
-import { IUser, User } from '../models/User';
+import { User } from '../models/User';
 
 export const userController = {
 	// Create a new user
@@ -11,13 +10,13 @@ export const userController = {
 			const newUser = new User({ username, password, firstname, lastname, role_id });
 			await newUser.save();
 
-			const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET as string, {
-				expiresIn: process.env.JWT_EXPIRES_IN,
-			});
+			// const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET as string, {
+			// 	expiresIn: process.env.JWT_EXPIRES_IN,
+			// });
 
-			res.status(201).json({ user: newUser, token });
+			res.status(201).json({ user: newUser });
 		} catch (error) {
-			res.status(400).json({ message: 'Error creating user', error });
+			res.status(400).json({ message: 'Error creating user' });
 		}
 	},
 
@@ -95,13 +94,18 @@ export const userController = {
 				return res.status(401).json({ message: 'Authentication failed' });
 			}
 
-			const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET as string, {
-				expiresIn: process.env.JWT_EXPIRES_IN,
-			});
+			const token = jwt.sign(
+				{ userId: user._id, role: user.role_id._id },
+				process.env.JWT_SECRET as string,
+				{ expiresIn: process.env.JWT_EXPIRES_IN },
+			);
 
-			res.status(200).json({ user, token });
+			res.status(200).json({
+				token,
+			});
 		} catch (error) {
-			res.status(400).json({ message: 'Error during login', error });
+			console.error('Login error:', error);
+			res.status(500).json({ message: 'Internal server error' });
 		}
 	},
 };

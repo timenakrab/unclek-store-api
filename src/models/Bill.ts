@@ -1,6 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IBill extends Document {
+	_id: mongoose.Types.ObjectId;
 	branch_id: mongoose.Types.ObjectId;
 	customer_name: string;
 	address: string;

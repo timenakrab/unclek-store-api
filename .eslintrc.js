@@ -20,5 +20,6 @@ module.exports = {
 		'import/newline-after-import': 'error',
 		'import/no-duplicates': 'error',
 		'@typescript-eslint/no-namespace': [2, { allowDeclarations: true }],
+		'@typescript-eslint/no-explicit-any': 'ignore',
 	},
 };
